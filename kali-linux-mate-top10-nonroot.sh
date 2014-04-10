@@ -49,8 +49,6 @@ mv kali_linux.jpg config/includes.chroot/usr/share/wallpapers/kali/contents/imag
 
 cat > config/hooks/mate.chroot<< EOF
 #!/bin/bash
-# useradd -m kali -G sudo -s /bin/bash
-# usermod -p 'X014elvznJq7E' kali
 wget http://mirror1.mate-desktop.org/debian/mate-archive-keyring.gpg
 apt-key add mate-archive-keyring.gpg
 rm -rf mate-archive-keyring.gpg
