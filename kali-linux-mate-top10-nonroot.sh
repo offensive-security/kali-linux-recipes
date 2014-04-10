@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Kali Linux ISO recipe for 	: Top 10 Mate
+# Kali Linux ISO recipe for 	: Top 10 Mate non-root
 #########################################################################################
 # Desktop 	: Mate 1.8
 # Metapackages	: kali-linux-top10
