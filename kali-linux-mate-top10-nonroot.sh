@@ -7,11 +7,16 @@
 # Total size 	: xxx Mb
 # Special notes	: Non root user installation enabled through preseed.cfg
 # Look and Feel	: Custom wallpaper and terminal configs through post install hooks.
+# Background	: http://www.offensive-security.com/?p=9739
 #########################################################################################
+
 
 git clone git://git.kali.org/live-build-config.git
 apt-get source debian-installer
 cd live-build-config
+
+# The user doesn't need the kali-linux-full metapackage, we overwrite with our own basic packages.
+# This includes the debian-installer and the kali-linux-top10 metapackage.
 
 cat > config/package-lists/kali.list.chroot << EOF
 kali-root-login
@@ -26,13 +31,21 @@ xorg
 #kali-linux-top10
 EOF
 
+# We instruct live-build to add external MATE repositories, and add relevant keys.
+# Taken from http://wiki.mate-desktop.org/download
+
 mkdir -p config/archives/
 echo "deb http://repo.mate-desktop.org/archive/1.8/debian/ wheezy main" > config/archives/mate.list.chroot
 wget http://mirror1.mate-desktop.org/debian/mate-archive-keyring.gpg -O config/archives/mate.key.chroot
 
+# We download a wallpaper and overlay it.
+
 mkdir -p config/includes.chroot/usr/share/wallpapers/kali/contents/images
 wget http://1hdwallpapers.com/wallpapers/kali_linux.jpg
 mv kali_linux.jpg config/includes.chroot/usr/share/wallpapers/kali/contents/images
+
+# We add a chroot hook to add the MATE archive-keyring, and install MATE. 
+# We even configure some of the terminal settings and wallpaper.
 
 cat > config/hooks/mate.chroot<< EOF
 #!/bin/bash
@@ -56,9 +69,13 @@ cp -rf /root/.config /etc/skel/
 
 EOF
 
+# We modify the default Kali preseed which disables normal user creation. We copied this from the debian installer package we initially downloaded.
+
 mkdir -p config/debian-installer
 cp ../debian-installer-*/build/preseed.cfg config/debian-installer/
 sed -i 's/make-user boolean false/make-user boolean true/' config/debian-installer/preseed.cfg
 echo "d-i passwd/root-login boolean false" >> config/debian-installer/preseed.cfg
+
+# Go ahead and run the build!
 lb build
 
