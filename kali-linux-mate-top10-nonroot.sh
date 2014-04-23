@@ -10,13 +10,17 @@
 # Background	: http://www.offensive-security.com/?p=9739
 #########################################################################################
 
+# Install dependencies
+apt-get update
+apt-get install git live-build cdebootstrap devscripts -y
 
+# Clone the default Kali live-build config.
 git clone git://git.kali.org/live-build-config.git
 apt-get source debian-installer
 cd live-build-config
 
 # The user doesn't need the kali-linux-full metapackage, we overwrite with our own basic packages.
-# This includes the debian-installer and the kali-linux-top10 metapackage.
+# This includes the debian-installer and the kali-linux-top10 metapackage (commented out for brevity of build, uncomment if needed).
 
 cat > config/package-lists/kali.list.chroot << EOF
 kali-root-login
@@ -31,7 +35,8 @@ xorg
 #kali-linux-top10
 EOF
 
-# We instruct live-build to add external MATE repositories, and add relevant keys.
+# Add the new Mate 1.8 as a Windows Manager.
+# We instruct live-build to add external MATE repositories and add relevant keys.
 # Taken from http://wiki.mate-desktop.org/download
 
 mkdir -p config/archives/
@@ -67,7 +72,8 @@ cp -rf /root/.config /etc/skel/
 
 EOF
 
-# We modify the default Kali preseed which disables normal user creation. We copied this from the debian installer package we initially downloaded.
+# We modify the default Kali preseed which disables normal user creation. 
+# We copied this from the debian installer package we initially downloaded.
 
 mkdir -p config/debian-installer
 cp ../debian-installer-*/build/preseed.cfg config/debian-installer/
@@ -76,4 +82,5 @@ echo "d-i passwd/root-login boolean false" >> config/debian-installer/preseed.cf
 
 # Go ahead and run the build!
 lb build
+
 
