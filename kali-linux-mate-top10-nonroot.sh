@@ -5,7 +5,8 @@
 # Desktop 	: Mate 1.8
 # Metapackages	: kali-linux-top10
 # Total size 	: xxx Mb
-# Special notes	: Non root user installation enabled through preseed.cfg
+# Special notes	: Non root user installation enabled through preseed.cfg. 
+#		: This script is not meant to run unattended.
 # Look and Feel	: Custom wallpaper and terminal configs through post install hooks.
 # Background	: http://www.offensive-security.com/?p=9739
 #########################################################################################
