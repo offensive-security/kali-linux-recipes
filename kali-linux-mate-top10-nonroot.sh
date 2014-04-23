@@ -11,14 +11,18 @@
 # Background	: http://www.offensive-security.com/?p=9739
 #########################################################################################
 
-# Install dependencies
+# Update and install dependencies
+
 apt-get update
 apt-get install git live-build cdebootstrap devscripts -y
 
 # Clone the default Kali live-build config.
+
 git clone git://git.kali.org/live-build-config.git
 
-# Get the source package of the debian installer. The default Kali preseed file lives here, and will need changing for non-root user support.
+# Get the source package of the debian installer. 
+# The default Kali preseed file lives here, and will need changing for non-root user support.
+
 apt-get source debian-installer
 
 # Let's begin our customisations:
@@ -88,5 +92,3 @@ echo "d-i passwd/root-login boolean false" >> config/debian-installer/preseed.cf
 
 # Go ahead and run the build!
 lb build
-
-
