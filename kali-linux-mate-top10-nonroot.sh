@@ -1,14 +1,14 @@
 #!/bin/bash
 
-# Kali Linux ISO recipe for 	: Top 10 Mate non-root
+# Kali Linux ISO recipe for : Top 10 Mate non-root
 #########################################################################################
 # Desktop 	: Mate 1.8
 # Metapackages	: kali-linux-top10
-# Total size 	: xxx Mb
+# ISO size 	: 1.36 GB 
 # Special notes	: Non root user installation enabled through preseed.cfg. 
 #		: This script is not meant to run unattended.
 # Look and Feel	: Custom wallpaper and terminal configs through post install hooks.
-# Background	: http://www.offensive-security.com/?p=9739
+# Background	: http://www.offensive-security.com/kali-linux/kali-linux-recipes/
 #########################################################################################
 
 # Update and install dependencies
