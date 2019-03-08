@@ -44,7 +44,6 @@ sslsplit
 responder
 openssh-server
 openvpn
-nginx
 EOF
 
 
